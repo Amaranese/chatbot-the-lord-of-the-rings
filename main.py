@@ -10,9 +10,6 @@ from tflearn.data_utils import *
 path = "lotr_data.txt"
 char_idx_file = 'char_idx.pickle'
 
-# Change to path of my own github folder
-#if not os.path.isfile(path):
-#    urllib.request.urlretrieve("https://raw.githubusercontent.com/tflearn/tflearn.github.io/master/resources/shakespeare_input.txt", path)
 
 maxlen = 25
 
@@ -42,7 +39,7 @@ m = tflearn.SequenceGenerator(g, dictionary=char_idx,
                               clip_gradients=5.0,
                               checkpoint_path='model_lotr')
 
-#for i in range(1):
+
 seed = random_sequence_from_textfile(path, maxlen)
 m.fit(X, Y, validation_set=0.1, batch_size=128,
       n_epoch=1, run_id='lotr')
@@ -51,8 +48,7 @@ m.fit(X, Y, validation_set=0.1, batch_size=128,
 the_awesome_lotr_sentences_file = open('the_awesome_lotr_sentences_file.txt', 'w')
 
 for i in range(10):
-  # I dare you to watch this video and then read the variable below without laughing
-  # https://www.youtube.com/watch?v=9U2pINNSpHE
-  gandaalfff = m.generate(600, temperature=1.0, seq_seed=seed) #random sentence
+  
+  gandaalfff = m.generate(600, temperature=1.0, seq_seed=seed) 
   the_awesome_lotr_sentences_file.write("\r%s\n" % gandaalfff)
   print('GANDALLFFFFF sentence: ' + i)
